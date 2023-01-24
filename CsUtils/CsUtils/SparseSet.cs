@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * fast insert and find in O(1) speed
+ * only support unsigned int
+ */
+
 namespace CsUtils
 {
     internal class SparseSet
