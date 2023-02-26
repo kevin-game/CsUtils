@@ -2,7 +2,10 @@
 using System.Threading.Channels;
 using CsUtils;
 using CsUtils.Algorithm;
+using CsUtils.LiteSave;
 
+SaveManager.Save("abc", 123);
+Console.WriteLine($"load game data: {SaveManager.Load<int>("abc")}");
 var types = TypeScanner.GetTypesWithAttribute<FlagsAttribute>();
 
 var a = 3;

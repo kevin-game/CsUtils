@@ -6,6 +6,10 @@ public static class TypeScanner
 {
     static readonly Dictionary<Type, List<Type>> _attrToTypes = new();
     static readonly Dictionary<Type, List<Type>> _interfaceToTypes = new();
+    //TODO: attr to normal methods
+    //TODO: attr to static methods
+    //TODO: attr to properties
+    //TODO: attr to fields
 
     static TypeScanner()
     {
@@ -14,24 +18,61 @@ public static class TypeScanner
 
         foreach (var type in types)
         {
-            // attributes to types
-            var attrs = type.GetCustomAttributes().Where(a => !IsSystemType(a.GetType()));
-            foreach (var attribute in attrs)
-            {
-                DictionarySafeAdd(_attrToTypes, attribute.GetType(), type);
-            }
-            
-            // interfaces to types
-            var interfaces = type.GetInterfaces().Where(i => !IsSystemType(i.GetType()));
-            foreach (var i in interfaces)
-            {
-                DictionarySafeAdd(_interfaceToTypes, i, type);
-            }
-            
-            
+            InitAttrToTypes(type);
+            InitInterfaceToTypes(type);
         }
     }
 
+    static void Release()
+    {
+        _attrToTypes.Clear();
+        _interfaceToTypes.Clear();
+    }
+
+    #region Init
+    
+    static void InitAttrToTypes(Type type)
+    {
+        var attrs = type.GetCustomAttributes().Where(a => !IsSystemType(a.GetType()));
+        foreach (var attribute in attrs)
+        {
+            DictionarySafeAdd(_attrToTypes, attribute.GetType(), type);
+        }
+    }
+    
+    static void InitInterfaceToTypes(Type type)
+    {
+        var interfaces = type.GetInterfaces().Where(i => !IsSystemType(i.GetType()));
+        foreach (var i in interfaces)
+        {
+            DictionarySafeAdd(_interfaceToTypes, i, type);
+        }
+    }
+    
+
+    #endregion
+
+    #region get
+    
+    public static List<Type>? GetTypesWithAttribute<TAttribute>()
+    {
+        if (_attrToTypes.ContainsKey(typeof(TAttribute)))
+            return _attrToTypes[typeof(TAttribute)].ToList();
+
+        return null;
+    }
+    
+    public static List<Type>? GetTypesWithInterface<TAttribute>()
+    {
+        if (_attrToTypes.ContainsKey(typeof(TAttribute)))
+            return _attrToTypes[typeof(TAttribute)].ToList();
+
+        return null;
+    }
+    
+
+    #endregion
+    
     static bool IsSystemType(Type type)
     {
         if (type.FullName == null) return false;
@@ -46,13 +87,5 @@ public static class TypeScanner
         if (!dict.ContainsKey(key)) 
             dict[key] = new List<TValue>();
         dict[key].Add(value);
-    }
-    
-    public static List<Type>? GetTypesWithAttribute<TAttribute>()
-    {
-        if (!_attrToTypes.ContainsKey(typeof(TAttribute)))
-            return _attrToTypes[typeof(TAttribute)].ToList();
-
-        return null;
     }
 }
