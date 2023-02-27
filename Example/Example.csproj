@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CsUtils\CsUtils.csproj" />
+    <ProjectReference Include="..\src\GameKit\GameKit.csproj" />
   </ItemGroup>
 
 </Project>
