@@ -64,7 +64,7 @@ public class BlockingDelayQueue<T>
 
     private class DelayQueueItem<TT>
     {
-        public TT Value { get; set; }
-        public DateTime ReadyTime { get; set; }
+        public TT Value { get; init; }
+        public DateTime ReadyTime { get; init; }
     }
 } 

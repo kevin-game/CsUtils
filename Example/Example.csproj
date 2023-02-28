@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CsUtils\CsUtils.csproj" />
-    <ProjectReference Include="..\src\GameKit\GameKit.csproj" />
+    <ProjectReference Include="..\IndieGameKit\IndieGameKit.csproj" />
+    <ProjectReference Include="..\src\CsUtils\CsUtils.csproj" />
+    <ProjectReference Include="..\src\IndieGameKit\IndieGameKit.csproj" />
   </ItemGroup>
 
 </Project>

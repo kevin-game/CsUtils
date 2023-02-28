@@ -82,7 +82,8 @@ public static class TypeScanner
         return false;
     }
 
-    static void DictionarySafeAdd<TKey, TValue>(Dictionary<TKey, List<TValue>> dict, TKey key, TValue value)
+    static void DictionarySafeAdd<TKey, TValue>(Dictionary<TKey, List<TValue>> dict, TKey key, TValue value) where 
+    TKey: notnull
     {
         if (!dict.ContainsKey(key)) 
             dict[key] = new List<TValue>();

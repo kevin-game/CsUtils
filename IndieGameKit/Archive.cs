@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
+using Microsoft.VisualBasic.FileIO;
 
-namespace GameKit;
+namespace IndieGameKit;
 
 public class Archive
 {
@@ -15,8 +16,8 @@ public class Archive
 
     #region serialize
 
-    string Encode<T>(T value) => JsonSerializer.Serialize(value, typeof(T));
-    static T? Decode<T>(string value) => JsonSerializer.Deserialize<T>(value);
+    string Encode<T>(T value) => ArchiveManager.Encode(value);
+    T? Decode<T>(string value) => ArchiveManager.Decode<T>(value);
     #endregion
 
     #region save/load
@@ -24,7 +25,7 @@ public class Archive
     void CreateFile()
     {
         if (File.Exists(FilePath))
-            throw new Exception("File already exist");
+            return;
 
         var fs = File.Create(FilePath);
         fs.Close();
@@ -70,11 +71,24 @@ public static class ArchiveManager
 {
     private static string _filePath = ".gamedata.archive";
 
-    #region file/archive operation
+    #region file
     
     public static void SetFilePath(string path) => _filePath = path;
 
     public static Archive Open(string archiveName) => new Archive(_filePath, archiveName);
+
+    public static void Delete(string archiveName)
+    {
+        if (!File.Exists(_filePath))
+            return;
+        
+        var fileData = File.ReadAllText(_filePath);
+        var dict = Decode<Dictionary<string, Dictionary<string, string>>>(fileData);
+        if (dict == null || !dict.ContainsKey(archiveName))
+            return;
+
+        dict.Remove(archiveName);
+    }
     
     #endregion
 
@@ -92,6 +106,13 @@ public static class ArchiveManager
         return archive.Load<T>(key);
     }
     
+    #endregion
+
+    #region serialize
+
+    public static string Encode<T>(T value) => JsonSerializer.Serialize(value, typeof(T));
+    public static T? Decode<T>(string value) => JsonSerializer.Deserialize<T>(value);
+
     #endregion
 
 }

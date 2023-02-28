@@ -2,7 +2,7 @@
 using System.Threading.Channels;
 using CsUtils;
 using CsUtils.Algorithm;
-using GameKit;
+using IndieGameKit;
 
 string usrName = "我爱罗";
 ArchiveManager.Save("存档1", "角色名", usrName);
