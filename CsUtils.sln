@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsUtils", "CsUtils\CsUtils.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieGameKit", "IndieGameKit\IndieGameKit.csproj", "{BAB95325-2E74-4DFD-B5FB-46F609774790}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineGame", "OnlineGame\OnlineGame.csproj", "{619AD63B-C3A6-44A1-9BAF-0F2FAB0AEAEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BAB95325-2E74-4DFD-B5FB-46F609774790}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB95325-2E74-4DFD-B5FB-46F609774790}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB95325-2E74-4DFD-B5FB-46F609774790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{619AD63B-C3A6-44A1-9BAF-0F2FAB0AEAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{619AD63B-C3A6-44A1-9BAF-0F2FAB0AEAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{619AD63B-C3A6-44A1-9BAF-0F2FAB0AEAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{619AD63B-C3A6-44A1-9BAF-0F2FAB0AEAEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
