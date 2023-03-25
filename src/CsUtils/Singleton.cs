@@ -23,6 +23,7 @@ public abstract class Singleton<T> where T : Singleton<T>, new() //泛型约束S
     }
 }
 
+
 ////Unity MonoSingleton
 //public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour, MonoSingleton<T>
 //{
